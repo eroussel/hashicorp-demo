@@ -8,24 +8,24 @@ terraform {
 }
 
 provider "aws" {
-  region = "us-east-1"
+  region = var.aws_region
 }
 
-resource "aws_vpc" "dev-vpc" {
+resource "aws_vpc" "dev_vpc" {
   cidr_block           = "10.0.0.0/16"
   instance_tenancy     = "default"
 
   tags = { 
-    Name = "dev-vpc"
+    Name = "${var.sdlc_environment} VPC"
   }
 
 }
 
 resource "aws_subnet" "app_1" {
-  vpc_id = aws_vpc.dev-vpc.id
+  vpc_id = aws_vpc.dev_vpc.id
   cidr_block = "10.0.1.0/24"
 
   tags = {
-    Name = "app_1 subnet"
+    Name = "App1 Subnet (${var.sdlc_environment})"
   }
 }
