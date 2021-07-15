@@ -17,6 +17,7 @@ resource "aws_vpc" "dev_vpc" {
 
   tags = { 
     Name = "${var.sdlc_environment} VPC"
+    Environment = var.sdlc_environment
   }
 
 }
@@ -27,5 +28,6 @@ resource "aws_subnet" "app_1" {
 
   tags = {
     Name = "App1 Subnet (${var.sdlc_environment})"
+    Environment = var.sdlc_environment
   }
 }
