@@ -45,3 +45,15 @@ resource "aws_instance" "vm" {
         Application = "App1"
     }
 }
+
+resource "aws_instance" "newvm" {
+    ami = data.aws_ami.amazon_linux_2.id
+    instance_type = "t2.micro"
+
+    subnet_id = data.terraform_remote_state.vpc.outputs.app1_development_subnet
+
+    tags = {
+        Name = "New Worker VM"
+        Application = "App1"
+    }
+}
